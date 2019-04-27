@@ -6,13 +6,19 @@ pipeline {
   }
   stages {
     stage('Clean and build') {
-      steps {
+    //  steps {
         // Compile the app and its dependencies
          parallel {
-           bat './gradlew clean'
-           bat './gradlew assembleDebug'
+         stage('Clean')
+         {
+           step { bat './gradlew clean' }
+         }
+         stage('Build')
+         {
+           step { bat './gradlew assembleDebug' }
+         }
         }
-      }
+     // }
     }
     stage('Unit test') {
       steps {
