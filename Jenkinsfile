@@ -8,8 +8,10 @@ pipeline {
     stage('Clean and build') {
       steps {
         // Compile the app and its dependencies
-        bat './gradlew clean'
-        bat './gradlew assembleDebug'
+         parallel {
+           bat './gradlew clean'
+           bat './gradlew assembleDebug'
+        }
       }
     }
     stage('Unit test') {
