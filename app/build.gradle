@@ -62,9 +62,21 @@ android {
         targetSdkVersion 27
     }
 
+    signingConfigs {
+        release {
+            storeFile file("unittestdemo.jks")
+            storePassword "123456"
+            keyAlias "unitTestDemo"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         debug {
             testCoverageEnabled true
+        }
+        release{
+            signingConfig signingConfigs.release
         }
     }
 }
