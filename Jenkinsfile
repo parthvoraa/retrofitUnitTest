@@ -11,10 +11,13 @@ pipeline {
          parallel {
          stage('Clean and build')
          {
-           steps { bat './gradlew clean' }
-           steps { bat './gradlew assembleDebug' }
+           steps
+           {
+            bat './gradlew clean'
+            bat './gradlew assembleDebug'
+            }
          }
-        
+
         }
      // }
     }
