@@ -5,10 +5,11 @@ pipeline {
     skipStagesAfterUnstable()
   }
   stages {
-    stage('Compile') {
+    stage('Clean and build') {
       steps {
         // Compile the app and its dependencies
-        sh './gradlew compileDebugSources'
+        sh './gradlew clean'
+        sh './gradlew assembleDebug'
       }
     }
     stage('Unit test') {
