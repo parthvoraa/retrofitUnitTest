@@ -37,7 +37,6 @@ pipeline {
             branch 'master'
           }
 
-
           environment {
             // Assuming a file credential has been added to Jenkins, with the ID 'my-app-signing-keystore',
             // this will export an environment variable during the build, pointing to the absolute path of
@@ -48,8 +47,6 @@ pipeline {
             SIGNING_KEY_PASSWORD = '123456'
 
           }
-
-
 
           steps {
             // Build the app in release mode, and sign the APK using the environment variables
