@@ -5,17 +5,17 @@ pipeline {
     skipStagesAfterUnstable()
   }
   stages {
-    stage('Clean and build') {
+    stages('Clean and build') {
     //  steps {
         // Compile the app and its dependencies
          parallel {
          stage('Clean')
          {
-           step { bat './gradlew clean' }
+           steps { bat './gradlew clean' }
          }
          stage('Build')
          {
-           step { bat './gradlew assembleDebug' }
+           steps { bat './gradlew assembleDebug' }
          }
         }
      // }
