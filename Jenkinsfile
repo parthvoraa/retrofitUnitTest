@@ -5,18 +5,16 @@ pipeline {
     skipStagesAfterUnstable()
   }
   stages {
-    stages('Clean and build') {
+    stage('Clean and build') {
     //  steps {
         // Compile the app and its dependencies
          parallel {
-         stage('Clean')
+         stage('Clean and build')
          {
            steps { bat './gradlew clean' }
-         }
-         stage('Build')
-         {
            steps { bat './gradlew assembleDebug' }
          }
+        
         }
      // }
     }
@@ -27,6 +25,8 @@ pipeline {
 
         // Analyse the test results and update the build result as appropriate
         junit '**/build/test-results/**/TEST-*.xml'
+        jacoco(classPattern: '**/tmp/kotlin-classes/debug/*-classes', sourceExclusionPattern: '**/R.class,**/R$*.class,**/*$ViewInjector*.*,**/*$ViewBinder*.*,**/BuildConfig.*,**/Manifest*.*,**/*$Lambda$*.*,**/*Module.*,**/*Dagger*.*,**/*MembersInjector*.*,**/*_Provide*Factory*.*,**/*_Factory*.*,**/*$*$*.*', sourceInclusionPattern: '/src/main/kotlin')
+
       }
     }
     stage('Build APK') {
@@ -70,3 +70,4 @@ pipeline {
   }
 
 }
+
